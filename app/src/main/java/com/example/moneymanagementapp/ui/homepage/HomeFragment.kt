@@ -7,35 +7,40 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.moneymanagementapp.R
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.moneymanagementapp.base.arch.BaseFragment
+import com.example.moneymanagementapp.databinding.FragmentHomeBinding
+import com.github.mikephil.charting.charts.PieChart
+import com.github.mikephil.charting.components.Legend
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(FragmentHomeBinding::inflate),
+    HomeContract.View {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var pieChart: PieChart
+
+
+    override fun initView() {
+        setupPieChart()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    override fun initViewModel(): HomePageViewModel {
+        TODO("Not yet implemented")
     }
+
+    override fun setupPieChart() {
+        pieChart.setUsePercentValues(true)
+        pieChart.description.text = "Income"
+        //hollow pie chart
+        pieChart.isDrawHoleEnabled = false
+        pieChart.setTouchEnabled(false)
+        pieChart.setDrawEntryLabels(false)
+        //adding padding
+        pieChart.setExtraOffsets(20f, 0f, 20f, 20f)
+        pieChart.setUsePercentValues(true)
+        pieChart.isRotationEnabled = false
+        pieChart.setDrawEntryLabels(false)
+        pieChart.legend.orientation = Legend.LegendOrientation.VERTICAL
+        pieChart.legend.isWordWrapEnabled = true
+    }
+
 
 }
