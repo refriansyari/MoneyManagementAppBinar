@@ -10,20 +10,20 @@ import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
 
 @Database(entities = [Transaction::class, Categories::class], version = 1, exportSchema = true)
-abstract class TransactionDatabase : RoomDatabase() {
+abstract class AppDatabase : RoomDatabase() {
     abstract fun transactionDao(): TransactionDao
     abstract fun categoriesDao(): CategoriesDao
 
     companion object {
-        private const val DB_NAME = "transaction_db"
+        private const val DB_NAME = "app_db"
 
         @Volatile
-        private var INSTANCE: TransactionDatabase? = null
-        fun getInstance(context: Context): TransactionDatabase {
+        private var INSTANCE: AppDatabase? = null
+        fun getInstance(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    TransactionDatabase::class.java,
+                    AppDatabase::class.java,
                     DB_NAME
                 ).build()
                 INSTANCE = instance

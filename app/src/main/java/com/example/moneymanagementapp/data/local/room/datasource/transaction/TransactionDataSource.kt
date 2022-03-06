@@ -18,5 +18,11 @@ interface TransactionDataSource {
 
     suspend fun getTransactionById(id: Int) : List<Transaction>
 
+    suspend fun getTotalIncome(): Double
+
+    suspend fun getTotalExpense(): Double
+
+    suspend fun getTotalAmount(): Double
+
     suspend fun getCategoryWithTransaction(categoryName: String): List<CategoriesWithTransaction>
 }
