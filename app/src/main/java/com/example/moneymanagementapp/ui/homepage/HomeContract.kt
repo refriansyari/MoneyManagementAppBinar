@@ -8,13 +8,20 @@ import com.example.moneymanagementapp.data.local.room.entity.Categories
 interface HomeContract {
     interface View : BaseContract.BaseView {
         fun setupPieChart()
-
-
+        fun setDataPieChart()
     }
 
     interface ViewModel : BaseContract.BaseViewModel {
+        fun getIncomeCategories()
+        fun getOutcomeCategories()
+        fun getCategoriesLiveData(): MutableLiveData<Resource<List<Categories>>>
+
     }
 
     interface Repository : BaseContract.BaseViewModel {
+        suspend fun getIncomeCategories(): List<Categories>
+        suspend fun getOutcomeCategories(): List<Categories>
+
     }
+
 }
