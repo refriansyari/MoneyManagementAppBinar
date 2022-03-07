@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.databinding.ActivityMainBinding
 import com.example.moneymanagementapp.ui.aboutpage.AboutFragment
-import com.example.moneymanagementapp.ui.categorypage.CategoryFragment
+import com.example.moneymanagementapp.ui.categorypage.CategoryListFragment
 import com.example.moneymanagementapp.ui.homepage.HomeFragment
 import com.example.moneymanagementapp.ui.transactionpage.TransactionFragment
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         val homeFragment = HomeFragment()
         val transactionPage = TransactionFragment()
-        val categoryFragment = CategoryFragment()
+        val categoryFragment = CategoryListFragment()
         val aboutFragment = AboutFragment()
 
         setCurrentFragment(homeFragment)

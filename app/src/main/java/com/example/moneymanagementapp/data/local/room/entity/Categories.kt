@@ -12,7 +12,7 @@ data class Categories(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo(name = "categoryName")
-    val categoryName: String,
+    var categoryName: String,
     @ColumnInfo(name = "categoryType")
-    val categoryType: String
+    var categoryType: String
 ) : Parcelable

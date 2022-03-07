@@ -6,17 +6,20 @@ import com.example.moneymanagementapp.data.local.room.entity.Categories
 @Dao
 interface CategoriesDao {
     @Insert
-    suspend fun insertCategory(category: Categories) : Long
+    suspend fun insertCategory(category: Categories): Long
 
     @Update
-    suspend fun updateCategory(category: Categories) : Int
+    suspend fun updateCategory(category: Categories): Int
 
     @Delete
-    suspend fun deleteCategory(category: Categories) : Int
+    suspend fun deleteCategory(category: Categories): Int
 
     @Query("SELECT * from categories_table WHERE categoryType = 'Income'")
-    fun getIncomeCategories() : List<Categories>
+    fun getIncomeCategories(): List<Categories>
 
     @Query("SELECT * from categories_table WHERE categoryType = 'Expense'")
-    fun getExpenseCategories() : List<Categories>
+    fun getExpenseCategories(): List<Categories>
+
+   /* @Query("SELECT * FROM categories_table WHERE ID == id")
+    suspend fun getCategoriesById(id: Int): List<Categories>*/
 }
