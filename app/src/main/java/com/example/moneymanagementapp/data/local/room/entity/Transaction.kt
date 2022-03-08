@@ -12,14 +12,14 @@ data class Transaction(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     @ColumnInfo(name = "transactionTitle")
-    val transactionTitle: String,
+    var transactionTitle: String,
     @ColumnInfo(name = "transactionType")
     val transactionType: String,
     @ColumnInfo(name = "transactionDetails")
-    val transactionDetails: String,
+    val transactionDetails: String?,
     @ColumnInfo(name = "transactionAmount")
-    val transactionAmount: Double,
+    var transactionAmount: Double?,
     @ColumnInfo(name = "categoryName")
-    val categoryName: String
+    var categoryName: String
 
 ) : Parcelable

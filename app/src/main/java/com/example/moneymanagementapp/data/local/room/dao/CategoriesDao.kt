@@ -2,6 +2,7 @@ package com.example.moneymanagementapp.data.local.room.dao
 
 import androidx.room.*
 import com.example.moneymanagementapp.data.local.room.entity.Categories
+import com.example.moneymanagementapp.data.local.room.entity.Transaction
 
 @Dao
 interface CategoriesDao {
