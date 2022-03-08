@@ -8,8 +8,10 @@ import com.example.moneymanagementapp.base.arch.BaseFragment
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
 import com.example.moneymanagementapp.data.local.room.database.AppDatabase
+import com.example.moneymanagementapp.data.local.room.datasource.TransactionDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Categories
+import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -28,8 +30,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
     }
 
     override fun initViewModel(): HomePageViewModel {
-        val dataSoure = CategoriesDataSourceImpl(AppDatabase.getInstance(requireContext()).categoriesDao())
-        val repository = HomePageRepository(dataSoure)
+        val dataSource = TransactionDataSourceImpl(AppDatabase.getInstance(requireContext()).transactionDao())
+        val repository = HomePageRepository(dataSource)
         return GenericViewModelFactory(HomePageViewModel(repository)).create(HomePageViewModel::class.java)
     }
 
@@ -48,12 +50,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
         getViewBinding().piechart.legend.isWordWrapEnabled = true
     }
 
-    override fun setDataPieChart(data: List<Categories>) {
+    override fun setDataPieChart(data: List<Transaction>) {
         getViewBinding().piechart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
         for(i in data.indices){
             val newData = data[i]
-            dataEntries.add(PieEntry(77f,newData.categoryName))
+            dataEntries.add(PieEntry(newData.transactionAmount!!.toFloat(),newData.transactionTitle))
         }
 
         val colors: ArrayList<Int> = ArrayList()
@@ -82,7 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
 
         //add text in center
         getViewBinding().piechart.setDrawCenterText(true);
-        getViewBinding().piechart.centerText = "Income by Categories"
+        getViewBinding().piechart.centerText = "Transactions chart by %"
 
 
 
@@ -90,11 +92,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
     }
 
     override fun getData() {
-        getViewModel().getOutcomeCategories()
+        getViewModel().getAllTransactions()
+        getViewModel().getTotalExpenseFun()
+        getViewModel().getTotalIncomeFun()
     }
 
     override fun observeData() {
-        getViewModel().getCategoriesLiveData().observe(this) {
+        getViewModel().getTransactionLiveData().observe(this) {
             when (it) {
                 is Resource.Loading -> {
                     showLoading(true)
