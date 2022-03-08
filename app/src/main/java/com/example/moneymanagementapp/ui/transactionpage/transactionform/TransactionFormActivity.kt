@@ -12,7 +12,7 @@ import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseActivity
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
-import com.example.moneymanagementapp.data.local.room.database.TransactionDatabase
+import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.TransactionDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.databinding.ActivityTransactionFormBinding
@@ -122,7 +122,7 @@ class TransactionFormActivity :
 
     override fun initViewModel(): TransactionFormViewModel {
         val repository = TransactionFormRepository(
-            TransactionDataSourceImpl(TransactionDatabase.getInstance(this).transactionDao())
+            TransactionDataSourceImpl(AppDatabase.getInstance(this).transactionDao())
         )
         return GenericViewModelFactory(TransactionFormViewModel(repository)).create(
             TransactionFormViewModel::class.java

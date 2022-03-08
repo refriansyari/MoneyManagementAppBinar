@@ -11,4 +11,8 @@
     <color name="green">#4CAF50</color>
     <color name="red">#FF0057</color>
     <color name="grey">#DDD8D9</color>
+    <color name="button">#0090C4</color>
+    <color name="button_option">#FF3838</color>
+    <color name="color_category">#CDCDCD</color>
+    <color name="color_card">#E6E6E6</color>
 </resources>

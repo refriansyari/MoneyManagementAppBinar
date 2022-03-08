@@ -16,7 +16,16 @@ interface TransactionDao {
     suspend fun updateTransaction(transaction: Transaction) : Int
 
     @Query("SELECT * FROM transaction_table")
-    suspend fun getAllTransactions() : List<Transaction>
+    suspend fun getAllTransactions(): List<Transaction>
+
+    @Query("SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Income'")
+    suspend fun getTotalIncome(): Double
+
+    @Query("SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Expense'")
+    suspend fun getTotalExpense(): Double
+
+    @Query("SELECT (SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Income') - (SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Expense')")
+    suspend fun getTotalAmount(): Double
 
     @Query("SELECT * FROM transaction_table WHERE ID == :id")
     suspend fun getTransactionById(id : Int) : List<Transaction>

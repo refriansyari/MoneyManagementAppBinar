@@ -3,11 +3,12 @@ package com.example.moneymanagementapp.ui.transactionpage.transactionlist
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.room.Database
 import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseFragment
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
-import com.example.moneymanagementapp.data.local.room.database.TransactionDatabase
+import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.TransactionDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.databinding.FragmentTransactionBinding
@@ -48,7 +49,7 @@ class TransactionListFragment :
 //    }
 
     override fun initViewModel(): TransactionListViewModel {
-        val dataSource = TransactionDataSourceImpl(TransactionDatabase.getInstance(requireContext()).transactionDao())
+        val dataSource = TransactionDataSourceImpl(AppDatabase.getInstance(requireContext()).transactionDao())
         val repository = TransactionListRepository(dataSource)
         return GenericViewModelFactory(TransactionListViewModel(repository)).create(TransactionListViewModel::class.java)
     }
