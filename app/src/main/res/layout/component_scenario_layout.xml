@@ -29,6 +29,5 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Example of message"
-        tools:visibility="visible" />
+        tools:text="Loading..." />
 </androidx.constraintlayout.widget.ConstraintLayout>

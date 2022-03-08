@@ -25,6 +25,18 @@ class TransactionDataSourceImpl(private val dao: TransactionDao): TransactionDat
         return dao.getTransactionById(id)
     }
 
+    override suspend fun getTotalIncome(): Double {
+        return dao.getTotalIncome()
+    }
+
+    override suspend fun getTotalExpense(): Double {
+        return dao.getTotalExpense()
+    }
+
+    override suspend fun getTotalAmount(): Double {
+        return dao.getTotalAmount()
+    }
+
     override suspend fun getCategoryWithTransaction(categoryName: String): List<CategoriesWithTransaction> {
         return dao.getCategoryWithTransaction(categoryName)
     }
