@@ -4,13 +4,12 @@ import com.example.moneymanagementapp.data.local.room.datasource.category.Catego
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.ui.homepage.HomeContract.Repository
 
-class HomePageRepository(private val categoriesDataSource: CategoriesDataSource) : HomeContract.Repository {
-    override suspend fun getIncomeCategories(): List<Categories> {
-        TODO("Not yet implemented")
-    }
+class HomePageRepository(private val categoriesDataSource: CategoriesDataSource) :
+    HomeContract.Repository {
+
 
     override suspend fun getOutcomeCategories(): List<Categories> {
-        TODO("Not yet implemented")
+        return categoriesDataSource.getExpenseCategories()
     }
 
 

@@ -7,8 +7,9 @@ import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseFragment
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
-import com.example.moneymanagementapp.data.local.room.database.TransactionDatabase
+import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
+import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
@@ -23,11 +24,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
     
     override fun initView() {
         setupPieChart()
-        setDataPieChart()
+        getData()
     }
 
     override fun initViewModel(): HomePageViewModel {
-        val dataSoure = CategoriesDataSourceImpl(TransactionDatabase.getInstance(requireContext()).categoriesDao())
+        val dataSoure = CategoriesDataSourceImpl(AppDatabase.getInstance(requireContext()).categoriesDao())
         val repository = HomePageRepository(dataSoure)
         return GenericViewModelFactory(HomePageViewModel(repository)).create(HomePageViewModel::class.java)
     }
@@ -47,17 +48,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
         getViewBinding().piechart.legend.isWordWrapEnabled = true
     }
 
-    override fun setDataPieChart() {
+    override fun setDataPieChart(data: List<Categories>) {
         getViewBinding().piechart.setUsePercentValues(true)
         val dataEntries = ArrayList<PieEntry>()
-        dataEntries.add(PieEntry(72f, "Working Salary"))
-        dataEntries.add(PieEntry(26f, "Side Job Salary"))
-        dataEntries.add(PieEntry(2f, "Other"))
+        for(i in data.indices){
+            val newData = data[i]
+            dataEntries.add(PieEntry(77f,newData.categoryName))
+        }
 
         val colors: ArrayList<Int> = ArrayList()
         colors.add(Color.parseColor("#4DD0E1"))
         colors.add(Color.parseColor("#FFF176"))
-        colors.add(Color.parseColor("#FF8A65"))
+
 
         val dataSet = PieDataSet(dataEntries, "")
         val data = PieData(dataSet)
@@ -87,36 +89,40 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
         getViewBinding().piechart.invalidate()
     }
 
-//    override fun observeData() {
-//        getViewModel().getCategoriesLiveData().observe(this) {
-//            when (it) {
-//                is Resource.Loading -> {
-//                    showLoading(true)
-//                    showError(false, null)
-//                    showContent(false)
-//                }
-//                is Resource.Success -> {
-//                    showLoading(false)
-//                    it.data?.let { notes ->
-//                        if (notes.isEmpty()) {
-//                            showError(true, "No Data Available")
-//                            showContent(false)
-//                        } else {
-//                            showError(false, null)
-//                            showContent(true)
-////                            setListData(notes)
-//                        }
-//                    }
-//                }
-//                is Resource.Error -> {
-//                    showLoading(false)
-//                    showError(true, it.message)
-//                    showContent(false)
-//                }
-//
-//            }
-//        }
-//    }
+    override fun getData() {
+        getViewModel().getOutcomeCategories()
+    }
+
+    override fun observeData() {
+        getViewModel().getCategoriesLiveData().observe(this) {
+            when (it) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                    showError(false, null)
+                    showContent(false)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    it.data?.let { notes ->
+                        if (notes.isEmpty()) {
+                            showError(true, "No Data Available")
+                            showContent(false)
+                        } else {
+                            showError(false, null)
+                            showContent(true)
+                            setDataPieChart(notes)
+                        }
+                    }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showError(true, it.message)
+                    showContent(false)
+                }
+
+            }
+        }
+    }
 
     override fun showLoading(isLoading: Boolean) {
         super.showLoading(isLoading)
