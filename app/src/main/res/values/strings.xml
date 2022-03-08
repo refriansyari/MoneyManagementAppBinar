@@ -55,4 +55,5 @@ Thomas Wendra Atmadja
     <string name="title_delete">Delete</string>
     <string name="titlebar_edit_category">Edit Category</string>
     <string name="titlebar_new_category">New Category</string>
+    <string name="text_zero">Rp0.0</string>
 </resources>

@@ -17,6 +17,38 @@ TransactionContract.ViewModel {
     private val transactionsData = MutableLiveData<Resource<List<Transaction>>>()
     private val categoriesData = MutableLiveData<Resource<List<CategoriesWithTransaction>>>()
 
+    //get income, expense, amount
+    private val getTotalIncome = MutableLiveData<Double>()
+    private val getTotalExpense = MutableLiveData<Double>()
+    private val getTotalAmount = MutableLiveData<Double>()
+
+    fun getTotalIncomeFun() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = repository.getTotalIncome()
+            viewModelScope.launch(Dispatchers.Main) {
+                getTotalIncome.value = data
+            }
+        }
+    }
+
+    fun getTotalExpenseFun() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = repository.getTotalExpense()
+            viewModelScope.launch(Dispatchers.Main) {
+                getTotalExpense.value = data
+            }
+        }
+    }
+
+    fun getTotalAmountFun() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val data = repository.getTotalAmount()
+            viewModelScope.launch(Dispatchers.Main) {
+                getTotalAmount.value = data
+            }
+        }
+    }
+
     override fun getAllTransactions() {
         //mainthread
         transactionsData.value = Resource.Loading()
@@ -63,5 +95,9 @@ TransactionContract.ViewModel {
 
 
     override fun getNotesLiveData(): MutableLiveData<Resource<List<Transaction>>> = transactionsData
+
+    override fun getIncomeLiveData(): MutableLiveData<Double> = getTotalIncome
+    override fun getExpenseLiveData(): MutableLiveData<Double> = getTotalExpense
+    override fun getAmountLiveData(): MutableLiveData<Double> = getTotalAmount
 
 }

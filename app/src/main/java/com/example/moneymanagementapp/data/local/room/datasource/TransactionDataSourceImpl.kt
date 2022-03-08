@@ -30,4 +30,16 @@ class TransactionDataSourceImpl(private val dao: TransactionDao) : TransactionDa
         return dao.updateTransaction(transaction)
     }
 
+    override suspend fun getTotalIncome(): Double {
+        return dao.getTotalIncome()
+    }
+
+    override suspend fun getTotalExpense(): Double {
+        return dao.getTotalExpense()
+    }
+
+    override suspend fun getTotalAmount(): Double {
+        return dao.getTotalAmount()
+    }
+
 }

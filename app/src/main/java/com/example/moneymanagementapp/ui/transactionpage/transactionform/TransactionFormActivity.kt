@@ -52,7 +52,7 @@ class TransactionFormActivity :
         getIntentData()
         initializeForm()
         onAddButtonClicked()
-        setCurrencyInRupiah()
+//        setCurrencyInRupiah()
         spinnerAdapter()
     }
 
@@ -129,14 +129,14 @@ class TransactionFormActivity :
         )
     }
 
-    private fun setCurrencyInRupiah() {
-        var localeId = Locale("in", "ID")
-        var formatRupiah = NumberFormat.getCurrencyInstance(localeId)
-        transaction?.let {
-            val amountInput = getViewBinding().etAmountInput
-            amountInput.setText(formatRupiah.format(it.transactionAmount))
-        }
-    }
+//    private fun setCurrencyInRupiah() {
+//        var localeId = Locale("in", "ID")
+//        var formatRupiah = NumberFormat.getCurrencyInstance(localeId)
+//        transaction?.let {
+//            val amountInput = getViewBinding().etAmountInput
+//            amountInput.setText(formatRupiah.format(it.transactionAmount))
+//        }
+//    }
 
 
     override fun getIntentData() {
@@ -206,7 +206,7 @@ class TransactionFormActivity :
                 transaction = transaction?.copy()?.apply {
                     transactionTitle = getViewBinding().etLabelInput.text.toString()
                     transactionAmount = getViewBinding().etAmountInput.text.toString().toDoubleOrNull()
-                    categoryName = getViewBinding().spinnerCategory.toString()
+                    categoryName = getViewBinding().spinnerCategory.selectedItem.toString()
                 }
 
                 transaction?.let {
@@ -221,7 +221,7 @@ class TransactionFormActivity :
                     id = 0,
                     transactionTitle = getViewBinding().etLabelInput.text.toString(),
                     transactionAmount = getViewBinding().etAmountInput.text.toString().toDoubleOrNull(),
-                    categoryName = getViewBinding().spinnerCategory.toString(),
+                    categoryName = getViewBinding().spinnerCategory.selectedItem.toString(),
                     transactionDetails = null,
                     transactionType = income.text.toString()
                 )

@@ -15,4 +15,10 @@ interface TransactionDataSource {
     suspend fun deleteTransaction(transaction : Transaction) : Int
 
     suspend fun updateTransaction(transaction : Transaction) : Int
+
+    suspend fun getTotalIncome(): Double
+
+    suspend fun getTotalExpense(): Double
+
+    suspend fun getTotalAmount(): Double
 }

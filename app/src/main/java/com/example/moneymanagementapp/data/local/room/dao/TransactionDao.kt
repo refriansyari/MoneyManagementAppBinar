@@ -18,13 +18,13 @@ interface TransactionDao {
     @Query("SELECT * FROM transaction_table")
     suspend fun getAllTransactions(): List<Transaction>
 
-    @Query("SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Income'")
+    @Query("SELECT TOTAL(transactionAmount) FROM transaction_table WHERE transactionType = 'INCOME'")
     suspend fun getTotalIncome(): Double
 
-    @Query("SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Expense'")
+    @Query("SELECT TOTAL(transactionAmount) FROM transaction_table WHERE transactionType = 'EXPENSE'")
     suspend fun getTotalExpense(): Double
 
-    @Query("SELECT (SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Income') - (SELECT SUM(transactionAmount) FROM transaction_table WHERE transactionType = 'Expense')")
+    @Query("SELECT (SELECT TOTAL(transactionAmount) FROM transaction_table WHERE transactionType = 'INCOME') - (SELECT TOTAL(transactionAmount) FROM transaction_table WHERE transactionType = 'EXPENSE')")
     suspend fun getTotalAmount(): Double
 
     @Query("SELECT * FROM transaction_table WHERE ID == :id")

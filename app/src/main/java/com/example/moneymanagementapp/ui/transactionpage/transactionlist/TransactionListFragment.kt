@@ -14,6 +14,7 @@ import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.databinding.FragmentTransactionBinding
 import com.example.moneymanagementapp.ui.transactionpage.transactionform.TransactionFormActivity
 import com.example.moneymanagementapp.ui.transactionpage.transactionlist.adapter.TransactionAdapter
+import java.text.NumberFormat
 import java.util.*
 
 
@@ -35,6 +36,7 @@ class TransactionListFragment :
         getViewBinding().floatingActionButton.setOnClickListener {
             TransactionFormActivity.startActivity(context, TransactionFormActivity.FORM_MODE_INSERT)
         }
+        updateDashboard()
 
     }
 
@@ -77,10 +79,42 @@ class TransactionListFragment :
 
     override fun getData() {
         getViewModel().getAllTransactions()
+        getViewModel().getTotalIncomeFun()
+        getViewModel().getTotalExpenseFun()
+        getViewModel().getTotalAmountFun()
     }
 
     override fun getDataCategories() {
         getViewModel().getCategoryWithTransactions()
+    }
+
+    override fun updateDashboard() {
+
+        val localId = Locale("in", "ID")
+        val formatRupiah = NumberFormat.getCurrencyInstance(localId)
+
+        getViewModel().getIncomeLiveData().observe(viewLifecycleOwner){value ->
+            if(value == 0.0){
+                getViewBinding().tvTotalIncome.text = getString(R.string.text_zero)
+            } else {
+                getViewBinding().tvTotalIncome.text = formatRupiah.format(value).toString()
+            }
+
+        }
+        getViewModel().getExpenseLiveData().observe(viewLifecycleOwner){value ->
+            if(value == 0.0){
+                getViewBinding().totalExpense.text = getString(R.string.text_zero)
+            } else {
+                getViewBinding().totalExpense.text = formatRupiah.format(value).toString()
+            }
+        }
+        getViewModel().getAmountLiveData().observe(viewLifecycleOwner){value ->
+            if(value == 0.0){
+                getViewBinding().totalBalance.text = getString(R.string.text_zero)
+            } else {
+                getViewBinding().totalBalance.text = formatRupiah.format(value).toString()
+            }
+        }
     }
 
 

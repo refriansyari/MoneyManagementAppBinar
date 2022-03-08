@@ -13,17 +13,24 @@ interface TransactionContract {
         fun setListData(data: List<Transaction>)
         fun getData()
         fun getDataCategories()
+        fun updateDashboard()
     }
 
     interface ViewModel : BaseContract.BaseViewModel {
         fun getAllTransactions()
         fun getCategoryWithTransactions()
         fun getNotesLiveData(): MutableLiveData<Resource<List<Transaction>>>
+        fun getIncomeLiveData(): MutableLiveData<Double>
+        fun getExpenseLiveData(): MutableLiveData<Double>
+        fun getAmountLiveData(): MutableLiveData<Double>
     }
 
     interface Repository : BaseContract.BaseRepository {
         suspend fun getAllTransactions(): List<Transaction>
         suspend fun getCategoryWithTransaction(): List<CategoriesWithTransaction>
+        suspend fun getTotalIncome(): Double
+        suspend fun getTotalExpense(): Double
+        suspend fun getTotalAmount(): Double
     }
 
 }
