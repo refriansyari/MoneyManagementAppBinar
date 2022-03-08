@@ -14,8 +14,8 @@ abstract class BaseActivity<B : ViewBinding, VM : BaseContract.BaseViewModel>(
     private lateinit var binding: B
     private lateinit var viewModel: VM
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding = bindingFactory(layoutInflater)
         setContentView(binding.root)
         viewModel = initViewModel()

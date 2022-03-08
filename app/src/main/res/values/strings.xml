@@ -16,4 +16,25 @@ Ikhsan Hidayat
 Muhammad Refri Ansyari
 Thomas Wendra Atmadja
     "</string>
+    <string name="title_edit">Edit</string>
+    <string name="text_category">Category</string>
+    <string name="text_add_name">Add Name</string>
+    <string name="text_hint_name">Name</string>
+    <string name="text_cancel">Cancel</string>
+    <string name="text_save">Save</string>
+    <string name="text_navigate_income">Income</string>
+    <string name="text_navigate_expense">Expense</string>
+    <string name="text_add_income">INCOME</string>
+    <string name="text_add_expense">EXPENSE</string>
+    <string name="text_bar_edit_categories">Edit Categories</string>
+    <string name="text_bar_categories">Categories</string>
+    <string name="text_category_added">Category Added</string>
+    <string name="text_category_failed">Failed</string>
+    <string name="text_delete_success">Delete Success</string>
+    <string name="text_delete_failed">Delete Failed !</string>
+    <string name="text_update_success">"Update Success "</string>
+    <string name="text_update_failed">Update Failed !</string>
+    <string name="title_delete">Delete</string>
+    <string name="titlebar_edit_category">Edit Category</string>
+    <string name="titlebar_new_category">New Category</string>
 </resources>
