@@ -8,7 +8,7 @@ import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseFragment
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
-import com.example.moneymanagementapp.data.local.room.database.TransactionDatabase
+import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.CategoriesDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.databinding.FragmentCategoryListBinding
@@ -47,7 +47,7 @@ class CategoryListFragment() :
 
     override fun initViewModel(): CategoryListViewModel {
         val dataSource = CategoriesDataSourceImpl(
-            TransactionDatabase.getInstance(requireContext()).categoriesDao()
+            AppDatabase.getInstance(requireContext()).categoriesDao()
         )
         val repository = CategoryListRepository(dataSource)
         return GenericViewModelFactory(CategoryListViewModel(repository)).create(

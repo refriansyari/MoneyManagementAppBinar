@@ -8,7 +8,7 @@ import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseActivity
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
-import com.example.moneymanagementapp.data.local.room.database.TransactionDatabase
+import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.CategoriesDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.databinding.ActivityEditCategoryBinding
@@ -72,7 +72,7 @@ class EditCategoryActivity :
 
     override fun initViewModel(): EditCategoryViewModel {
         val repository = EditCategoryRepository(
-            CategoriesDataSourceImpl(TransactionDatabase.getInstance(this).categoriesDao())
+            CategoriesDataSourceImpl(AppDatabase.getInstance(this).categoriesDao())
         )
         return GenericViewModelFactory(EditCategoryViewModel(repository)).create(
             EditCategoryViewModel::class.java
