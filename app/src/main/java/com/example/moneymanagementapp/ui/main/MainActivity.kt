@@ -11,7 +11,7 @@ import com.example.moneymanagementapp.databinding.ActivityMainBinding
 import com.example.moneymanagementapp.ui.aboutpage.AboutFragment
 import com.example.moneymanagementapp.ui.categorypage.CategoryListFragment
 import com.example.moneymanagementapp.ui.homepage.HomeFragment
-import com.example.moneymanagementapp.ui.transactionpage.TransactionFragment
+import com.example.moneymanagementapp.ui.transactionpage.transactionlist.TransactionListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         bindViews()
 
         val homeFragment = HomeFragment()
-        val transactionPage = TransactionFragment()
+        val transactionPage = TransactionListFragment()
         val categoryFragment = CategoryListFragment()
         val aboutFragment = AboutFragment()
 

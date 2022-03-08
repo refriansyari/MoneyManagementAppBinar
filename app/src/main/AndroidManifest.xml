@@ -24,6 +24,9 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.transactionpage.transactionform.TransactionFormActivity"
+            android:exported="true" />
         <activity android:name=".ui.editcategory.EditCategoryActivity"
             android:exported="true"/>
     </application>
