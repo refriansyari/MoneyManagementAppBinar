@@ -23,8 +23,8 @@ class IntroActivity : AppIntro2() {
                 descriptionColorRes = R.color.black,
                 titleColorRes = R.color.black,
                 imageDrawable = R.drawable.ic_intro1,
-                title = "Money Management App",
-                description = "You can use this application to help you record your daily income and expenses"
+                title = getString(R.string.text_title_landing_page),
+                description = getString(R.string.text_description_landing_page)
             )
         )
         addSlide(
@@ -32,8 +32,8 @@ class IntroActivity : AppIntro2() {
                 descriptionColorRes = R.color.black,
                 titleColorRes = R.color.black,
                 imageDrawable = R.drawable.ic_intro2,
-                title = "Graph Feature",
-                description = "This application also can show graph based on your income and expenses (monthly)"
+                title = getString(R.string.text_graph),
+                description = getString(R.string.text_description_graph)
             )
         )
         addSlide(
@@ -41,8 +41,8 @@ class IntroActivity : AppIntro2() {
                 descriptionColorRes = R.color.black,
                 titleColorRes = R.color.black,
                 imageDrawable = R.drawable.ic_intro3,
-                title = "News Feature",
-                description = "You can also read up-to-date news about crypto, stocks, and currencies at news section"
+                title = getString(R.string.text_features),
+                description = getString(R.string.text_description_features)
             )
         )
     }

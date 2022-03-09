@@ -59,4 +59,10 @@ Thomas Wendra Atmadja
     <string name="text_income_rb">Income</string>
     <string name="text_expense_rb">Expense</string>
     <string name="text_delete">Delete</string>
+    <string name="text_title_landing_page">Money Management App</string>
+    <string name="text_description_landing_page">You can use this application to help you record your daily income and expenses</string>
+    <string name="text_graph">Graph Feature</string>
+    <string name="text_description_graph">This application can show graph based on your income and expenses</string>
+    <string name="text_features">News Feature</string>
+    <string name="text_description_features">You can also read up-to-date news about crypto, stocks, and currencies at news section</string>
 </resources>
