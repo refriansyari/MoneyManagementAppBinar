@@ -58,4 +58,5 @@ Thomas Wendra Atmadja
     <string name="text_zero">Rp0.0</string>
     <string name="text_income_rb">Income</string>
     <string name="text_expense_rb">Expense</string>
+    <string name="text_delete">Delete</string>
 </resources>

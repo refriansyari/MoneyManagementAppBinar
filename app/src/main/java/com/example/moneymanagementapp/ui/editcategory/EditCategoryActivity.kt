@@ -198,10 +198,10 @@ class EditCategoryActivity :
     }
 
     private fun initializeForm() {
-        if (editMode == FORM_MODE_UPDATE) {
-//            category?.let {
-//                getViewBinding().etCategory.setText(it.categoryName)
-//                if (category?.categoryType == true) {
+//        if (editMode == FORM_MODE_UPDATE) {
+//            category = category?.copy().apply {
+//                getViewBinding().etCategory.setText(this?.categoryName)
+//                if (category?.categoryType == "INCOME") {
 //                    getViewBinding().tvOptionExpense.setBackgroundResource(R.drawable.bg_text_options_form)
 //                    getViewBinding().tvOptionExpense.resources.getColor(R.color.white)
 //                }else{
@@ -210,6 +210,23 @@ class EditCategoryActivity :
 //
 //                }
 //            }
+//            supportActionBar?.title = getString(R.string.titlebar_edit_category)
+//        } else {
+//
+//            supportActionBar?.title = getString(R.string.titlebar_new_category)
+//        }
+
+        if (editMode == FORM_MODE_UPDATE) {
+            category = category?.copy().apply {
+                getViewBinding().tvAddName.text = "Edit Category"
+                getViewBinding().btnDeleteCategory.visibility = View.VISIBLE
+                getViewBinding().etCategory.setText(category?.categoryName.toString())
+                getViewBinding().btnDeleteCategory.setOnClickListener {
+                    category?.let {
+                        getViewModel().deleteCategory(it)
+                    }
+                }
+            }
             supportActionBar?.title = getString(R.string.titlebar_edit_category)
         } else {
 

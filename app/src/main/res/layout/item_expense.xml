@@ -48,16 +48,6 @@
                 tools:text="(Beli Seblak)" />
 
             <ImageView
-                android:id="@+id/iv_delete_expense"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_delete"
-                app:layout_constraintEnd_toStartOf="@id/iv_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_marginEnd="15dp"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <ImageView
                 android:id="@+id/iv_arrow"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
