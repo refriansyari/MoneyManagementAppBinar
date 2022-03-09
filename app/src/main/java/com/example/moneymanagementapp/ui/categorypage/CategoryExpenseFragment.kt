@@ -4,8 +4,6 @@ import androidx.fragment.app.Fragment
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseFragment
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
@@ -13,8 +11,6 @@ import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.databinding.FragmentCategoryExpenseBinding
-import com.example.moneymanagementapp.databinding.FragmentCategoryIncomeBinding
-import com.example.moneymanagementapp.databinding.FragmentCategoryListBinding
 import com.example.moneymanagementapp.ui.categorypage.adapter.CategoriesAdapter
 import com.example.moneymanagementapp.ui.categorypage.adapter.ViewPagerAdapter
 import com.example.moneymanagementapp.ui.editcategory.EditCategoryActivity
