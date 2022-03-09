@@ -65,4 +65,5 @@ Thomas Wendra Atmadja
     <string name="text_description_graph">This application can show graph based on your income and expenses</string>
     <string name="text_features">News Feature</string>
     <string name="text_description_features">You can also read up-to-date news about crypto, stocks, and currencies at news section</string>
+    <string name="text_homepage">Homepage</string>
 </resources>

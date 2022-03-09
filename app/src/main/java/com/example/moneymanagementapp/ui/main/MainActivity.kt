@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 //        val aboutFragment = AboutFragment()
 
         setCurrentFragment(homeFragment)
+        supportActionBar?.title = getString(R.string.text_homepage)
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
