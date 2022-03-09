@@ -1,10 +1,7 @@
 package com.example.moneymanagementapp.ui.homepage
 
-import com.example.moneymanagementapp.data.local.room.datasource.TransactionDataSourceImpl
-import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSource
-import com.example.moneymanagementapp.data.local.room.entity.Categories
+import com.example.moneymanagementapp.data.local.room.datasource.transaction.TransactionDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
-import com.example.moneymanagementapp.ui.homepage.HomeContract.Repository
 
 class HomePageRepository(private val transactionDataSource: TransactionDataSourceImpl) :
     HomeContract.Repository {

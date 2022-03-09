@@ -12,6 +12,7 @@ import com.example.moneymanagementapp.base.model.Resource
 import com.example.moneymanagementapp.data.local.room.database.AppDatabase
 import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Categories
+import com.example.moneymanagementapp.databinding.FragmentCategoryIncomeBinding
 import com.example.moneymanagementapp.databinding.FragmentCategoryListBinding
 import com.example.moneymanagementapp.ui.categorypage.adapter.CategoriesAdapter
 import com.example.moneymanagementapp.ui.categorypage.adapter.ViewPagerAdapter
@@ -21,8 +22,8 @@ import com.example.moneymanagementapp.utils.CommonFunction
 import com.example.moneymanagementapp.utils.SpacesItemDecoration
 import com.google.android.material.tabs.TabLayoutMediator
 
-class CategoryListFragment() :
-    BaseFragment<FragmentCategoryListBinding, CategoryListViewModel>(FragmentCategoryListBinding::inflate),
+class CategoryIncomeFragment() :
+    BaseFragment<FragmentCategoryIncomeBinding, CategoryListViewModel>(FragmentCategoryIncomeBinding::inflate),
     CategoryListContract.View {
 
     private lateinit var adapter: CategoriesAdapter
@@ -54,16 +55,16 @@ class CategoryListFragment() :
 
     override fun setupRecyclerView() {
         adapter = CategoriesAdapter {
-           if (it.categoryType == "INCOME"){
-               showDialogEdit(it)
-           }else if (it.categoryType == "EXPENSE"){
-               showDialogEdit(it)
-           }
+            if (it.categoryType == "INCOME"){
+                showDialogEdit(it)
+            }else if (it.categoryType == "EXPENSE"){
+                showDialogEdit(it)
+            }
         }
         getViewBinding().rvCategories.apply {
             layoutManager = StaggeredGridLayoutManager(1,LinearLayoutManager.VERTICAL)
             addItemDecoration(SpacesItemDecoration(CommonFunction.dpToPixels(requireContext(),2)))
-            adapter = this@CategoryListFragment.adapter
+            adapter = this@CategoryIncomeFragment.adapter
         }
     }
 
@@ -79,27 +80,11 @@ class CategoryListFragment() :
     }
 
     override fun getData() {
-
-        getViewBinding().tvNavigateExpense.setOnClickListener {
-            getViewBinding().tvNavigateIncome.setTextColor(resources.getColor(R.color.black))
-            getViewBinding().tvNavigateIncome.setBackgroundResource(0)
-            getViewBinding().tvNavigateExpense.setTextColor(resources.getColor(R.color.white))
-            getViewBinding().tvNavigateExpense.setBackgroundResource(R.drawable.bg_button_navigate_category)
-            getViewModel().getExpenseCategories()
-        }
-        getViewBinding().tvNavigateIncome.setOnClickListener {
-            getViewBinding().tvNavigateIncome.setTextColor(resources.getColor(R.color.white))
-            getViewBinding().tvNavigateIncome.setBackgroundResource(R.drawable.bg_button_navigate_category)
-            getViewBinding().tvNavigateExpense.setTextColor(resources.getColor(R.color.black))
-            getViewBinding().tvNavigateExpense.setBackgroundResource(0)
-            getViewModel().getIncomeCategories()
-        }
-
-
+        getViewModel().getIncomeCategories()
     }
 
     override fun showDialogEdit(note: Categories) {
-    EditCategoryActivity.startActivity(context,EditCategoryActivity.FORM_MODE_UPDATE,note)
+        EditCategoryActivity.startActivity(context,EditCategoryActivity.FORM_MODE_UPDATE,note)
     }
 
     override fun showLoading(isVisible: Boolean) {

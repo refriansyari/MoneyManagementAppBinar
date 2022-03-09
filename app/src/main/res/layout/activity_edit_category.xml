@@ -2,239 +2,105 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="16dp">
 
- <androidx.cardview.widget.CardView
-     android:layout_width="match_parent"
-     app:layout_constraintBottom_toBottomOf="parent"
-     app:cardCornerRadius="2dp"
-     app:layout_constraintEnd_toEndOf="parent"
-     app:cardBackgroundColor="@color/color_card"
-     app:layout_constraintHorizontal_bias="0.5"
-     app:layout_constraintStart_toStartOf="parent"
-     app:layout_constraintTop_toTopOf="parent"
-     android:layout_height="wrap_content">
+    <RadioGroup
+        android:id="@+id/rg_category_type"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.2">
 
-  <androidx.constraintlayout.widget.ConstraintLayout
-      android:layout_width="match_parent"
-      android:id="@+id/cs_form"
-      android:layout_height="match_parent">
+        <RadioButton
+           android:id="@+id/rb_income"
+            android:checked="true"
+            android:layout_marginEnd="50dp"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_income_rb"/>
 
-   <TextView
-       android:id="@+id/tv_add_name"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_marginEnd="210dp"
-       android:layout_marginBottom="4dp"
-       android:text="@string/text_add_name"
-       android:textAlignment="center"
-       android:textColor="@color/black"
-       android:textSize="14sp"
-       android:textStyle="bold"
-       app:layout_constraintBottom_toTopOf="@id/et_category"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent" />
+       <RadioButton
+          android:id="@+id/rb_expense"
+           android:layout_width="wrap_content"
+           android:textSize="18sp"
+           android:layout_height="wrap_content"
+          android:text="@string/text_expense_rb"/>
+    </RadioGroup>
 
-   <EditText
-       android:id="@+id/et_category"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginStart="40dp"
-       android:layout_marginTop="60dp"
-       android:layout_marginEnd="40dp"
-       android:background="@drawable/bg_color_name_category"
-       android:hint="@string/text_hint_name"
-       android:inputType="textMultiLine"
-       android:maxLines="1"
-       android:overScrollMode="always"
-       android:padding="10dp"
-       android:scrollbarStyle="insideInset"
-       android:scrollbars="horizontal"
-       android:scrollHorizontally="false"
-       android:textColor="@color/black"
-       android:textSize="14sp"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/tv_option_expense" />
-
-   <Button
-       android:id="@+id/btn_cancel"
-       android:layout_width="100dp"
-       android:layout_height="40dp"
-       android:layout_gravity="center"
-       android:layout_marginStart="50dp"
-       android:layout_marginTop="100dp"
-       android:backgroundTint="@color/button"
-       android:text="@string/text_cancel"
-       android:textAllCaps="false"
-       android:textColor="@color/white"
-       android:textSize="16sp"
-       app:layout_constraintEnd_toStartOf="@id/btn_save"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toBottomOf="@id/et_category"
-       app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-   <Button
-       android:id="@+id/btn_save"
-       android:layout_width="100dp"
-       android:layout_height="40dp"
-       android:layout_gravity="center"
-       android:layout_marginTop="100dp"
-       android:layout_marginEnd="50dp"
-       android:backgroundTint="@color/button"
-       android:text="@string/text_save"
-       android:textAllCaps="false"
-       android:textColor="@color/white"
-       android:textSize="16sp"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toEndOf="@id/btn_cancel"
-       app:layout_constraintTop_toBottomOf="@id/et_category"
-       app:layout_constraintBottom_toBottomOf="parent"/>
-
-   <TextView
-       android:id="@+id/tv_option_income"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:padding="2dp"
-       android:layout_marginTop="14dp"
-       android:text="@string/text_add_income"
-       android:layout_marginStart="80dp"
-       android:textStyle="bold"
-       android:textAlignment="center"
-       android:textColor="@color/black"
-       app:layout_constraintEnd_toStartOf="@id/tv_option_expense"
-       android:textSize="14sp"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent" />
-
-   <TextView
-       android:id="@+id/tv_option_expense"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:textStyle="bold"
-       android:layout_marginTop="14dp"
-       android:padding="2dp"
-       android:text="@string/text_add_expense"
-       android:textAlignment="center"
-       android:layout_marginEnd="80dp"
-       android:textColor="@color/black"
-       android:textSize="14sp"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toEndOf="@id/tv_option_income"
-      app:layout_constraintTop_toTopOf="parent" />
-  </androidx.constraintlayout.widget.ConstraintLayout>
- </androidx.cardview.widget.CardView>
-
-
-   <!-- <TextView
-        android:id="@+id/tv_edit_category"
+    <TextView
+        android:id="@+id/tv_add_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_category"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/text_add_category_name"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="24sp"
+        android:textSize="25sp"
+        android:layout_marginTop="50dp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rg_category_type"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <EditText
+        android:id="@+id/et_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_color_name_category"
+        android:hint="@string/text_hint_name"
+        android:inputType="textMultiLine"
+        android:maxLines="1"
+        android:overScrollMode="always"
+        android:padding="10dp"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="horizontal"
+        android:scrollHorizontally="false"
+        android:textColor="@color/black"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
+        app:layout_constraintTop_toBottomOf="@id/tv_add_name" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/blue_light"
+        android:text="@string/text_cancel"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/btn_save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_category" />
 
 
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="130dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="@color/blue_light"
+        android:text="@string/text_save"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_cancel"
+        app:layout_constraintTop_toBottomOf="@id/et_category" />
 
 
-    <!-- <androidx.coordinatorlayout.widget.CoordinatorLayout
-         android:layout_width="match_parent"
-         android:layout_height="280dp"
-         app:cardCornerRadius="4dp"
-         app:layout_constraintBottom_toBottomOf="parent"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintHorizontal_bias="0.0"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent"
-         app:layout_constraintVertical_bias="0.498">
-
-         <com.google.android.material.bottomappbar.BottomAppBar
-             android:id="@+id/bottomAppBar"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_gravity="top"
-             app:fabCradleMargin="10dp"
-             app:fabCradleRoundedCornerRadius="10dp"
-             app:fabCradleVerticalOffset="10dp">
-
-             <TextView
-                 android:id="@+id/tv_edit_category"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginStart="110dp"
-                 android:text="@string/text_edit_category"
-                 android:textAlignment="center"
-                 android:textColor="@color/black"
-                 android:textSize="18sp"
-                 android:textStyle="bold" />
-
-         </com.google.android.material.bottomappbar.BottomAppBar>
-
-         <TextView
-             android:id="@+id/tv_add_title"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="46dp"
-             android:layout_marginTop="100dp"
-             android:text="@string/text_add_title"
-             android:textAlignment="center"
-             android:textColor="@color/black"
-             android:textSize="14sp"
-             android:textStyle="bold" />
-
-         <EditText
-             android:id="@+id/et_category"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="46dp"
-             android:layout_marginTop="120dp"
-             android:layout_marginEnd="46dp"
-             android:background="@drawable/bg_color_name_category"
-             android:gravity="left"
-             android:hint="@string/text_hint_name"
-             android:inputType="textMultiLine"
-             android:maxLines="1"
-             android:overScrollMode="always"
-             android:padding="10dp"
-             android:scrollbarStyle="insideInset"
-             android:scrollbars="horizontal"
-             android:scrollHorizontally="false"
-             android:textColor="@color/black"
-             android:textSize="14sp" />
-
-         <Button
-             android:id="@+id/btn_cancel"
-             android:layout_width="80dp"
-             android:layout_height="36dp"
-             android:layout_gravity="center"
-             android:layout_marginTop="230dp"
-             android:layout_marginEnd="100dp"
-             android:backgroundTint="@color/button"
-             android:text="@string/text_cancel"
-             android:textAllCaps="false"
-             android:textColor="@color/white"
-             android:textSize="12sp" />
-
-
-         <Button
-             android:id="@+id/btn_save"
-             android:layout_width="80dp"
-             android:layout_height="36dp"
-             android:layout_gravity="center"
-             android:layout_marginStart="100dp"
-             android:layout_marginTop="230dp"
-             android:backgroundTint="@color/button"
-             android:text="@string/text_save"
-             android:textAllCaps="false"
-             android:textColor="@color/white"
-             android:textSize="12sp" />
-
-     </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 </androidx.constraintlayout.widget.ConstraintLayout>

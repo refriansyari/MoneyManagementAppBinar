@@ -4,20 +4,21 @@ import android.content.Context
 import android.content.Intent
 import android.view.MenuItem
 import android.view.View
-import android.widget.ArrayAdapter
-import android.widget.RadioButton
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseActivity
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
 import com.example.moneymanagementapp.data.local.room.database.AppDatabase
-import com.example.moneymanagementapp.data.local.room.datasource.TransactionDataSourceImpl
+import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
+import com.example.moneymanagementapp.data.local.room.datasource.transaction.TransactionDataSourceImpl
+import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.databinding.ActivityTransactionFormBinding
 import com.example.moneymanagementapp.utils.CommonConstant
-import java.text.NumberFormat
+import com.google.android.material.textfield.TextInputLayout
 import java.util.*
 
 class TransactionFormActivity :
@@ -88,21 +89,76 @@ class TransactionFormActivity :
         }
     }
 
-    private fun spinnerAdapter(){
-        val spinner: Spinner = findViewById(R.id.spinner_category)
-// Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.categories,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
-        }
-    }
+    private fun spinnerAdapter() {
+//        val spinner: Spinner = findViewById(R.id.spinner_category)
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.categories,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            spinner.adapter = adapter
+//        }
 
+
+//        val etCategoryIncome = findViewById<Spinner>(R.id.spinner_category)
+//        val etCategoryExpense = findViewById<Spinner>(R.id.spinner_category_2)
+//
+//        when(getViewBinding().rgType.checkedRadioButtonId){
+//            R.id.rb_income -> {
+//                etCategoryIncome.visibility = View.VISIBLE
+//                etCategoryExpense.visibility = View.GONE
+//            }
+//            R.id.rb_expense -> {
+//                etCategoryIncome.visibility = View.GONE
+//                etCategoryExpense.visibility = View.VISIBLE
+//            }
+//        }
+
+        getViewModel().getIncomeList()
+        getViewModel().getExpenseList()
+
+
+        val etCategoryIncome = findViewById<TextInputLayout>(R.id.et_category)
+        val etCategoryExpense = findViewById<TextInputLayout>(R.id.et_category_2)
+
+        getViewBinding().rgType.setOnCheckedChangeListener { radioGroup, id ->
+            if (id == R.id.radio_income){
+                etCategoryIncome.visibility = View.VISIBLE
+                etCategoryExpense.visibility = View.GONE
+            } else if (id == R.id.radio_expense) {
+                etCategoryExpense.visibility = View.VISIBLE
+                etCategoryIncome.visibility = View.GONE
+            }
+        }
+
+
+
+        val spinnerIncome : Spinner = findViewById(R.id.spinner_category)
+        getViewModel().getIncomeLiveData().observe(this) {
+            val spinnerAdapter =
+                ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, it)
+            spinnerIncome.adapter = spinnerAdapter
+        }
+
+        val spinnerExpense : Spinner = findViewById(R.id.spinner_category_2)
+        getViewModel().getExpenseLiveData().observe(this){
+            val spinnerAdapter =
+                ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, it)
+            spinnerExpense.adapter = spinnerAdapter
+        }
+
+//        if(transaction?.transactionType == "INCOME"){
+//            etCategoryIncome.visibility = View.VISIBLE
+//            etCategoryExpense.visibility = View.GONE
+//        } else {
+//            etCategoryIncome.visibility = View.GONE
+//            etCategoryExpense.visibility = View.VISIBLE
+//        }
+    }
 
 
     private fun initializeForm() {
@@ -122,7 +178,7 @@ class TransactionFormActivity :
 
     override fun initViewModel(): TransactionFormViewModel {
         val repository = TransactionFormRepository(
-            TransactionDataSourceImpl(AppDatabase.getInstance(this).transactionDao())
+            TransactionDataSourceImpl(AppDatabase.getInstance(this).transactionDao()), CategoriesDataSourceImpl(AppDatabase.getInstance(this).categoriesDao())
         )
         return GenericViewModelFactory(TransactionFormViewModel(repository)).create(
             TransactionFormViewModel::class.java
@@ -205,7 +261,8 @@ class TransactionFormActivity :
                 // do edit
                 transaction = transaction?.copy()?.apply {
                     transactionTitle = getViewBinding().etLabelInput.text.toString()
-                    transactionAmount = getViewBinding().etAmountInput.text.toString().toDoubleOrNull()
+                    transactionAmount =
+                        getViewBinding().etAmountInput.text.toString().toDoubleOrNull()
                     categoryName = getViewBinding().spinnerCategory.selectedItem.toString()
                 }
 
@@ -220,7 +277,8 @@ class TransactionFormActivity :
                 transaction = Transaction(
                     id = 0,
                     transactionTitle = getViewBinding().etLabelInput.text.toString(),
-                    transactionAmount = getViewBinding().etAmountInput.text.toString().toDoubleOrNull(),
+                    transactionAmount = getViewBinding().etAmountInput.text.toString()
+                        .toDoubleOrNull(),
                     categoryName = getViewBinding().spinnerCategory.selectedItem.toString(),
                     transactionDetails = null,
                     transactionType = income.text.toString()

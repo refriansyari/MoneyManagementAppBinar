@@ -15,7 +15,7 @@ interface TransactionDao {
     @Update
     suspend fun updateTransaction(transaction: Transaction) : Int
 
-    @Query("SELECT * FROM transaction_table")
+    @Query("SELECT * FROM transaction_table ORDER BY id DESC")
     suspend fun getAllTransactions(): List<Transaction>
 
     @Query("SELECT TOTAL(transactionAmount) FROM transaction_table WHERE transactionType = 'INCOME'")

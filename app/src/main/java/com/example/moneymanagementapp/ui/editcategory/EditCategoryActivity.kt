@@ -9,7 +9,7 @@ import com.example.moneymanagementapp.base.arch.BaseActivity
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
 import com.example.moneymanagementapp.data.local.room.database.AppDatabase
-import com.example.moneymanagementapp.data.local.room.datasource.CategoriesDataSourceImpl
+import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.databinding.ActivityEditCategoryBinding
 import com.example.moneymanagementapp.utils.CommonConstant
@@ -158,50 +158,58 @@ class EditCategoryActivity :
     }
 
     private fun saveCategory() {
+
+        when (getViewBinding().rgCategoryType.checkedRadioButtonId) {
+            R.id.rb_income -> {
+                category?.categoryType = "INCOME"
+            }
+            R.id.rb_expense -> {
+                category?.categoryType = "EXPENSE"
+            }
+        }
+
         if (validateForm()) {
             if (editMode == FORM_MODE_UPDATE) {
                 category = category?.copy()?.apply {
                     categoryName = getViewBinding().etCategory.text.toString()
-                    categoryType = getViewBinding().tvOptionExpense.let {
-                        true
-                    }
-                    categoryType = getViewBinding().tvOptionIncome.let {
-                        false
-                    }
+                    categoryType
                 }
                 category?.let { getViewModel().updateCategory(it) }
-            } else {
+            }
+             else {
+
+                when (getViewBinding().rgCategoryType.checkedRadioButtonId) {
+                    R.id.rb_income -> {
+                        category?.categoryType = "INCOME"
+                    }
+                    R.id.rb_expense -> {
+                        category?.categoryType = "EXPENSE"
+                    }
+                }
 
                 category = Categories(
                     id = 0,
-
-                    categoryType = getViewBinding().tvOptionExpense.let {
-                        true
-
-                    },
-                    categoryName = getViewBinding().etCategory.text.toString()
-
-
+                    categoryName = getViewBinding().etCategory.text.toString(),
+                    categoryType = category?.categoryType ?: "INCOME"
                 )
                 category?.let { getViewModel().insertCategory(it) }
-            }
-        }
+            } }
 
     }
 
     private fun initializeForm() {
         if (editMode == FORM_MODE_UPDATE) {
-            category?.let {
-                getViewBinding().etCategory.setText(it.categoryName)
-                if (category?.categoryType == true) {
-                    getViewBinding().tvOptionExpense.setBackgroundResource(R.drawable.bg_text_options_form)
-                    getViewBinding().tvOptionExpense.resources.getColor(R.color.white)
-                }else{
-                    getViewBinding().tvOptionIncome.setBackgroundResource(R.drawable.bg_text_options_form)
-                    getViewBinding().tvOptionIncome.resources.getColor(R.color.white)
-
-                }
-            }
+//            category?.let {
+//                getViewBinding().etCategory.setText(it.categoryName)
+//                if (category?.categoryType == true) {
+//                    getViewBinding().tvOptionExpense.setBackgroundResource(R.drawable.bg_text_options_form)
+//                    getViewBinding().tvOptionExpense.resources.getColor(R.color.white)
+//                }else{
+//                    getViewBinding().tvOptionIncome.setBackgroundResource(R.drawable.bg_text_options_form)
+//                    getViewBinding().tvOptionIncome.resources.getColor(R.color.white)
+//
+//                }
+//            }
             supportActionBar?.title = getString(R.string.titlebar_edit_category)
         } else {
 

@@ -3,7 +3,7 @@ package com.example.moneymanagementapp.data.local.room.datasource.category
 import com.example.moneymanagementapp.data.local.room.dao.CategoriesDao
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 
-class CategoriesDataSourceImpl(private val dao: CategoriesDao): CategoriesDataSource {
+class CategoriesDataSourceImpl(private val dao: CategoriesDao) : CategoriesDataSource {
     override suspend fun insertCategory(category: Categories): Long {
         return dao.insertCategory(category)
     }
@@ -23,4 +23,16 @@ class CategoriesDataSourceImpl(private val dao: CategoriesDao): CategoriesDataSo
     override suspend fun getExpenseCategories(): List<Categories> {
         return dao.getExpenseCategories()
     }
+
+    override suspend fun getIncomeTitle(): List<String> {
+        return dao.getIncomeTitle()
+    }
+
+    override suspend fun getExpenseTitle(): List<String> {
+        return dao.getExpenseTitle()
+    }
+
+    /* override suspend fun getCategoriesById(id: Int): List<Categories> {
+         return dao.getCategoriesById(id)
+     }*/
 }

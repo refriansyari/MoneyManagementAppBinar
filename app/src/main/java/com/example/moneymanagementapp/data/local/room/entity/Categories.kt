@@ -14,5 +14,5 @@ data class Categories(
     @ColumnInfo(name = "categoryName")
     var categoryName: String,
     @ColumnInfo(name = "categoryType")
-    var categoryType: Boolean?
+    var categoryType: String
 ) : Parcelable

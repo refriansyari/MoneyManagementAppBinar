@@ -1,10 +1,13 @@
 package com.example.moneymanagementapp.ui.categorypage.adapter;
 
 import android.graphics.drawable.GradientDrawable
+import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.databinding.ItemExpenseBinding
 import com.example.moneymanagementapp.databinding.ItemIncomeBinding
@@ -58,12 +61,13 @@ class CategoriesAdapter(private val itemClick: (Categories) -> Unit) :
         } else if (holder is ExpenseViewHolder) {
             holder.bindView(items[position])
         }
+
     }
 
     override fun getItemCount(): Int = items.size
 
     override fun getItemViewType(position: Int): Int =
-        if (items[position].categoryType == true)
+        if (items[position].categoryType == "EXPENSE")
             ITEM_EXPENSE
         else
             ITEM_INCOME
@@ -86,12 +90,14 @@ class CategoriesAdapter(private val itemClick: (Categories) -> Unit) :
             }
 
         }
+
     }
 
     class ExpenseViewHolder(
         private val binding: ItemExpenseBinding,
         val itemClick: (Categories) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
+
 
         fun bindView(item: Categories) {
             with(item) {

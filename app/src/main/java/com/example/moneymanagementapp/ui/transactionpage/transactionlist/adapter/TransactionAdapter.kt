@@ -2,6 +2,7 @@ package com.example.moneymanagementapp.ui.transactionpage.transactionlist.adapte
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
@@ -39,9 +40,22 @@ class TransactionAdapter(private val itemClick: (Transaction) -> Unit) :
         fun bindView(item: Transaction) {
             with(item) {
                 binding.tvTransactionName.text = item.transactionTitle
-                binding.tvTransactionAmount.text = item.transactionAmount.toString()
+
+                val format = Locale("in", "ID")
+                val numberFormatRupiah = NumberFormat.getCurrencyInstance(format)
+
+                binding.tvTransactionAmount.text = numberFormatRupiah.format(item.transactionAmount).toString()
+                if (transactionType == "INCOME"){
+                    binding.tvTransactionAmount.setTextColor(ContextCompat.getColor(binding.tvTransactionAmount.context, R.color.green))
+                    binding.ivListTransactions.setImageResource(R.drawable.ic_wallet)
+                } else {
+                    binding.tvTransactionAmount.setTextColor(ContextCompat.getColor(binding.tvTransactionAmount.context, R.color.red))
+                    binding.ivListTransactions.setImageResource(R.drawable.ic_income)
+                }
+
                 binding.tvTransactionCategory.text = item.categoryName
                 itemView.setOnClickListener { itemClick(this) }
+
             }
         }
     }

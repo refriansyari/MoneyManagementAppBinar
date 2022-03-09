@@ -13,8 +13,8 @@
         android:id="@+id/mCategory"
         android:icon="@drawable/ic_category"
         android:title="Category" />
-    <item
-        android:id="@+id/mAbout"
-        android:icon="@drawable/ic_about"
-        android:title="About" />
+<!--    <item-->
+<!--        android:id="@+id/mAbout"-->
+<!--        android:icon="@drawable/ic_about"-->
+<!--        android:title="About" />-->
 </menu>

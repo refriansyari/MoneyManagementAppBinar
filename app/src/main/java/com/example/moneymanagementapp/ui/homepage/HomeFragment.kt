@@ -3,18 +3,14 @@ package com.example.moneymanagementapp.ui.homepage
 
 import android.graphics.Color
 import androidx.core.view.isVisible
-import com.example.moneymanagementapp.R
 import com.example.moneymanagementapp.base.arch.BaseFragment
 import com.example.moneymanagementapp.base.arch.GenericViewModelFactory
 import com.example.moneymanagementapp.base.model.Resource
 import com.example.moneymanagementapp.data.local.room.database.AppDatabase
-import com.example.moneymanagementapp.data.local.room.datasource.TransactionDataSourceImpl
-import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSourceImpl
-import com.example.moneymanagementapp.data.local.room.entity.Categories
+import com.example.moneymanagementapp.data.local.room.datasource.transaction.TransactionDataSourceImpl
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.databinding.FragmentHomeBinding
 import com.github.mikephil.charting.animation.Easing
-import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -55,7 +51,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomePageViewModel>(Fragmen
         val dataEntries = ArrayList<PieEntry>()
         for(i in data.indices){
             val newData = data[i]
-            dataEntries.add(PieEntry(newData.transactionAmount!!.toFloat(),newData.transactionTitle))
+            dataEntries.add(PieEntry(newData.transactionAmount!!.toFloat(),newData.transactionType))
         }
 
         val colors: ArrayList<Int> = ArrayList()

@@ -1,7 +1,6 @@
 package com.example.moneymanagementapp.ui.editcategory
 
-import com.example.moneymanagementapp.data.local.room.datasource.CategoriesDataSource
-import com.example.moneymanagementapp.data.local.room.datasource.CategoriesDataSourceImpl
+import com.example.moneymanagementapp.data.local.room.datasource.category.CategoriesDataSource
 import com.example.moneymanagementapp.data.local.room.entity.Categories
 
 class EditCategoryRepository(

@@ -15,11 +15,17 @@ interface CategoriesDao {
     @Delete
     suspend fun deleteCategory(category: Categories): Int
 
-    @Query("SELECT * from categories_table WHERE categoryType = '0'")
+    @Query("SELECT * from categories_table WHERE categoryType = 'INCOME' ORDER BY id DESC")
     fun getIncomeCategories(): List<Categories>
 
-    @Query("SELECT * from categories_table WHERE categoryType = '1'")
+    @Query("SELECT * from categories_table WHERE categoryType = 'EXPENSE' ORDER BY id DESC")
     fun getExpenseCategories(): List<Categories>
+
+    @Query("SELECT categoryName from categories_table WHERE categoryType = 'INCOME'")
+    fun getIncomeTitle(): List<String>
+
+    @Query("SELECT categoryName from categories_table WHERE categoryType = 'EXPENSE'")
+    fun getExpenseTitle(): List<String>
 
    /* @Query("SELECT * FROM categories_table WHERE ID == id")
     suspend fun getCategoriesById(id: Int): List<Categories>*/

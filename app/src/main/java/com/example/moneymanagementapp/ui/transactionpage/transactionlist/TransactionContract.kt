@@ -3,6 +3,7 @@ package com.example.moneymanagementapp.ui.transactionpage.transactionlist
 import androidx.lifecycle.MutableLiveData
 import com.example.moneymanagementapp.base.arch.BaseContract
 import com.example.moneymanagementapp.base.model.Resource
+import com.example.moneymanagementapp.data.local.room.entity.Categories
 import com.example.moneymanagementapp.data.local.room.entity.Transaction
 import com.example.moneymanagementapp.data.local.room.entity.relations.CategoriesWithTransaction
 

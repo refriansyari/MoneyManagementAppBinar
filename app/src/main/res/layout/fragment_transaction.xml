@@ -11,9 +11,9 @@
         android:id="@+id/cv_dashboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="5dp"
         app:cardElevation="15dp"
         app:cardCornerRadius="10dp">
 
@@ -35,8 +35,8 @@
                     android:id="@+id/tv_total_income"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Rp 200.0000"
-                    android:textSize="15sp"
+                    tools:text="Rp 200.000"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/green"/>
 
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Rp 200.0000"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/red"/>
 
@@ -85,8 +85,8 @@
                     android:id="@+id/total_balance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="Rp 200.0000"
-                    android:textSize="15sp"
+                    tools:text="Rp 200.000"
+                    android:textSize="13sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
 
